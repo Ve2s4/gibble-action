@@ -2,9 +2,8 @@
 	"name": "@gibble/action",
 	"version": "0.0.1",
 	"main": "out/index.js",
-	"type": "module",
 	"scripts": {
-		"build": "tsup src/index.ts --format esm,cjs --dts --out-dir out"
+		"build": "tsc"
 	},
 	"devDependencies": {
 		"@actions/core": "^1.11.1",
