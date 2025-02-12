@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "CommonJS",  // Change this from ES2022/NodeNext
+    "module": "CommonJS",
     "outDir": "out",
     "forceConsistentCasingInFileNames": true,
     "strict": true,

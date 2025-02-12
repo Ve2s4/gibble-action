@@ -1,5 +1,5 @@
-import * as core from '@actions/core';
-import * as github from '@actions/github';
+import core = require('@actions/core');
+import github = require('@actions/github');
 
 async function getChangedFiles() {
     try {
@@ -32,7 +32,7 @@ async function getChangedFiles() {
             batches.push(batch);
         }
 
-        const allFiles = new Map<string, string>();
+        const allFiles = new Map();
 
         // Process batches sequentially, but files within batch in parallel
         for (const batch of batches) {
@@ -87,11 +87,11 @@ async function run() {
         body: JSON.stringify({
             projectId: projectId,
             apiKey: apiKey,
-            changedFiles: changedFiles
+            changedFiles: Array.from(changedFiles.entries()) // Convert Map to Array
         })
-    })
+    });
 
-    if (!response.ok) core.setFailed("Something went wrong.")
+    if (!response.ok) core.setFailed("Something went wrong.");
 
     for (const [path, content] of changedFiles) {
         // Do something with path and content
