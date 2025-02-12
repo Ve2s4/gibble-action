@@ -1,5 +1,5 @@
-import core = require('@actions/core');
-import github = require('@actions/github');
+import * as core from '@actions/core';
+import * as github from '@actions/github';
 
 async function getChangedFiles() {
     try {
@@ -87,16 +87,13 @@ async function run() {
         body: JSON.stringify({
             projectId: projectId,
             apiKey: apiKey,
-            changedFiles: Array.from(changedFiles.entries()) // Convert Map to Array
+            changedFiles: changedFiles
         })
-    });
+    })
 
-    if (!response.ok) core.setFailed("Something went wrong.");
+    console.log(changedFiles)
 
-    for (const [path, content] of changedFiles) {
-        // Do something with path and content
-        core.debug(`Processing file: ${path}/n${content}`);
-    }
+    if (!response.ok) core.setFailed("Something went wrong")
 }
 
 run();
