@@ -1,1 +1,0 @@
-# gibble-action
